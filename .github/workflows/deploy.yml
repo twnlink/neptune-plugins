@@ -42,7 +42,7 @@ jobs:
               uses: peaceiris/actions-gh-pages@v3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./.dist
+                  publish_dir: .dist
                   # https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
                   # This creates the CNAME file required to host github pages on a custom domain
                   # Remove this to use default [username].github.io domain
