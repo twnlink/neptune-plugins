@@ -7,21 +7,11 @@ const clientId = "1130698654987067493";
 
 const rpc = new AutoClient({ transport: "ipc" });
 
-// TODO: Add pause support
-const paused = {
-  details: `Browsing TIDAL`,
-  largeImageKey: "tidal-logo",
-  largeImageText: `TIDAL`,
-  instance: false,
-};
-
 const formatLongString = (s) => (s.length >= 128 ? s.slice(0, 125) + "..." : s);
 
 const client = rpc.endlessLogin({ clientId });
 
 client.then(() => {
-  rpc.setActivity(paused);
-
   unloadables.push(
     intercept("playbackControls/TIME_UPDATE", ([current]) => {
       const state = store.getState();
@@ -33,13 +23,6 @@ client.then(() => {
 
       // TODO: add video support
       if (mediaType != "track") return;
-      const playing = state.playbackControls.playbackState == "PLAYING";
-
-      if (!playing) {
-        rpc.setActivity(paused);
-
-        return;
-      }
 
       const albumArtURL = getMediaURLFromID(currentlyPlaying.album.cover);
 
@@ -49,13 +32,22 @@ client.then(() => {
         date.getSeconds() + (currentlyPlaying.duration - current)
       );
 
+      const paused = state.playbackControls.playbackState == "NOT_PLAYING";
+
       rpc.setActivity({
+        ...(paused
+          ? {
+              smallImageKey: "paused-icon",
+              smallImageText: "Paused",
+            }
+          : {
+              startTimestamp: now,
+              endTimestamp: remaining,
+            }),
         details: formatLongString(currentlyPlaying.title),
         state: formatLongString(
           "by " + currentlyPlaying.artists.map((a) => a.name).join(", ")
         ),
-        startTimestamp: now,
-        endTimestamp: remaining,
         largeImageKey: albumArtURL,
         largeImageText: formatLongString(currentlyPlaying.album.title),
       });
