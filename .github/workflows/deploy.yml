@@ -30,6 +30,7 @@ jobs:
                 do
                   cd $plugin
                   pnpm install
+                  cd ../..
                 done
 
             - name: Build plugin(s)
