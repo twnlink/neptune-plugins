@@ -15,6 +15,8 @@ const paused = {
   instance: false,
 };
 
+const formatLongString = (s) => (s.length >= 128 ? s.slice(0, 125) + "..." : s);
+
 const client = rpc.endlessLogin({ clientId });
 
 client.then(() => {
@@ -48,12 +50,14 @@ client.then(() => {
       );
 
       rpc.setActivity({
-        details: currentlyPlaying.title,
-        state: "by " + currentlyPlaying.artists.map((a) => a.name).join(", "),
+        details: formatLongString(currentlyPlaying.title),
+        state: formatLongString(
+          "by " + currentlyPlaying.artists.map((a) => a.name).join(", ")
+        ),
         startTimestamp: now,
         endTimestamp: remaining,
         largeImageKey: albumArtURL,
-        largeImageText: currentlyPlaying.album.title,
+        largeImageText: formatLongString(currentlyPlaying.album.title),
       });
     })
   );
