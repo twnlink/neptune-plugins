@@ -1,0 +1,6 @@
+{
+  "name": "Example Plugin",
+  "description": "An example neptune plugin that shows confetti when it's enabled.",
+  "author": "toonlink",
+  "main": "./src/index.js"
+}

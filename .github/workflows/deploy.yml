@@ -1,0 +1,50 @@
+name: Build and deploy
+
+on:
+    push:
+        branches: [master]
+        paths:
+          - "plugins/**"
+    workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Prepare environment
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16"
+
+            - name: Install dependencies
+              run: |
+                npm i -g pnpm
+                pnpm i
+                for plugin in plugins/*
+                do
+                  cd $plugin
+                  pnpm install
+                done
+
+            - name: Build plugin(s)
+              run: |
+                  mkdir .dist
+                  pnpm run build
+                  for plugin in plugins/*
+                  do
+                    cp -r $plugin/dist .dist/$(basename $plugin)
+                  done
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./.dist
+                  # https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+                  # This creates the CNAME file required to host github pages on a custom domain
+                  # Remove this to use default [username].github.io domain
+                  # Reminder: using a free domain service like freenom *can* result in your users getting hacked
+                  #cname: example.com
