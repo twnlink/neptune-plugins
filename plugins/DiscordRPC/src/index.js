@@ -5,10 +5,9 @@ import { AutoClient } from "discord-auto-rpc";
 const unloadables = [];
 const clientId = "1130698654987067493";
 
-const rpc = new AutoClient({ transport: "ipc" });
-
 const formatLongString = (s) => (s.length >= 128 ? s.slice(0, 125) + "..." : s);
 
+const rpc = new AutoClient({ transport: "ipc" });
 const client = rpc.endlessLogin({ clientId });
 
 client.then(() => {
