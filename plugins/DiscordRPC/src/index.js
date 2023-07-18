@@ -41,13 +41,17 @@ client.then(() => {
 
       const albumArtURL = getMediaURLFromID(currentlyPlaying.album.cover);
 
+      const date = new Date();
+      const now = (date.getTime() / 1000) | 0;
+      const remaining = date.setSeconds(
+        date.getSeconds() + (currentlyPlaying.duration - current)
+      );
+
       rpc.setActivity({
         details: currentlyPlaying.title,
         state: "by " + currentlyPlaying.artists.map((a) => a.name).join(", "),
         startTimestamp: now,
-        endTimestamp: new Date().setSeconds(
-          new Date().getSeconds() + (currentlyPlaying.duration - current)
-        ),
+        endTimestamp: remaining,
         largeImageKey: albumArtURL,
         largeImageText: currentlyPlaying.album.title,
       });
