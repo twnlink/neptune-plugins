@@ -12,8 +12,8 @@ unloadables.push(
     () => true
   ),
   appendStyle(
-    `[class*="sidebarUpgrade--"],[data-test^="streaming-audio-quality-"][class*="selectItemIsDisabled--"]{display:none!important}`
-  )
+    `[class*="sidebarUpgrade--"],[class*="field--"]:has([class*="disableUnderline--"]){display:none!important}`
+    )
 );
 
 export const onUnload = () => unloadables.forEach((u) => u());
