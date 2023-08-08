@@ -10,3 +10,8 @@ Copy the following URL to the neptune plugin install page to install AdBlock: `h
 Discord RPC shows the song you're currently listening to on Discord.
 
 Copy the following URL to the neptune plugin install page to install Discord RPC: `https://twnlink.github.io/neptune-plugins/DiscordRPC`
+
+## Experiments
+Experiments allows you to toggle experimental TIDAL features.
+
+Copy the following URL to the neptune plugin install page to install Experiments: `https://twnlink.github.io/neptune-plugins/Experiments`

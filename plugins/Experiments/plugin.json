@@ -1,0 +1,6 @@
+{
+  "name": "Experiments",
+  "description": "A simple interface for forcibly enabling official TIDAL experiments.",
+  "author": "toonlink",
+  "main": "./index.js"
+}
