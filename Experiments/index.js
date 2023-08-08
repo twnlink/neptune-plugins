@@ -1,13 +1,13 @@
-import{intercept as l}from"@neptune";import{getState as c}from"@neptune/store";import{setFlags as a}from"@neptune/actions/featureFlags";import{html as n,For as s}from"@neptune/voby";import{storage as o}from"@plugin";function i(t,r){a({flags:[{name:t,type:"BOOLEAN",value:r}]})}l("featureFlags/GET_FLAGS",()=>{Object.entries(o).forEach(([t,r])=>i(t,r))},!0);function d(){Object.keys(o).forEach(t=>i(t,!1))}function f(t){o[t]=!o[t],i(t,o[t])}function F(){let{featureFlags:{flags:t}}=c(),r=Object.values(t).filter(e=>e.type=="BOOLEAN").map(e=>e.name);return n`<div>
-    <${s} values=${r}>
-      ${e=>n`<div style="display:flex;justify-content:space-between">
-          <label for=${e}>${e}</label>
+import{intercept as i}from"@neptune";import{getState as f}from"@neptune/store";import{setFlags as n}from"@neptune/actions/featureFlags";import{html as a,For as l}from"@neptune/voby";import{storage as r}from"@plugin";function s(e,o){n({flags:[{name:e,type:"BOOLEAN",value:o}]})}i("featureFlags/GET_FLAGS",()=>{Object.entries(r).forEach(([e,o])=>s(e,o))});function $(){Object.keys(r).forEach(e=>s(e,!1))}function b(){let{featureFlags:{flags:e}}=f(),o=Object.values(e).filter(t=>t.type=="BOOLEAN").map(t=>t.name);return a`<div>
+    <${l} values=${o}>
+      ${t=>a`<div style="display:flex;justify-content:space-between">
+          <label for=${t}>${t}</label>
           <input
-            id=${e}
+            id=${t}
             type="checkbox"
-            checked=${()=>o[e]}
-            onChange=${()=>f(e)}
+            checked=${()=>r[t]}
+            onChange=${()=>r[t]=!r[t]}
           />
         </div>`}
-    </${s}>
-  </div>`}export{F as Settings,d as onUnload};
+    </${l}>
+  </div>`}export{b as Settings,$ as onUnload};
