@@ -17,22 +17,12 @@ function setFlag(flagName, value) {
 }
 
 // This ensures that we activate flags at the correct time.
-intercept(
-  "featureFlags/GET_FLAGS",
-  () => {
-    Object.entries(storage).forEach(([n, v]) => setFlag(n, v));
-  },
-  true
-);
+intercept("featureFlags/GET_FLAGS", () => {
+  Object.entries(storage).forEach(([n, v]) => setFlag(n, v));
+});
 
 export function onUnload() {
   Object.keys(storage).forEach((n) => setFlag(n, false));
-}
-
-function toggleFlag(flagName) {
-  storage[flagName] = !storage[flagName];
-
-  setFlag(flagName, storage[flagName]);
 }
 
 export function Settings() {
@@ -53,7 +43,7 @@ export function Settings() {
             id=${name}
             type="checkbox"
             checked=${() => storage[name]}
-            onChange=${() => toggleFlag(name)}
+            onChange=${() => (storage[name] = !storage[name])}
           />
         </div>`}
     </${For}>
