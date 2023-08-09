@@ -1,0 +1,1 @@
+import{intercept as t}from"@neptune";var s=t("user/LOAD_USER_SUCCESS",([e])=>{e.meta.earlyAccessProgram=!0,e.subscription={...e.subscription,status:"ACTIVE",subscription:{type:"PREMIUM_PLUS",offlineGracePeriod:30},premiumAccess:!0,canGetTrial:!1,paymentType:"PARENT"}});export{s as onUnload};
