@@ -6,6 +6,12 @@ AdBlock blocks TIDAL Free ads.
 
 Copy the following URL to the neptune plugin install page to install AdBlock: `https://twnlink.github.io/neptune-plugins/AdBlock`
 
+## Fake HiFi
+Fake HiFi tricks the app into thinking you have HiFi, allowing you to get access to lyrics and other HiFi only features. NOTE: This does not give you access to higher sound qualities than "Low".
+
+Copy the following URL to the neptune plugin install page to install AdBlock: `https://twnlink.github.io/neptune-plugins/FakeHiFi`
+
+
 ## Discord RPC
 Discord RPC shows the song you're currently listening to on Discord.
 
