@@ -42,7 +42,7 @@ const unloadables = [
     }
   }),
   appendStyle(
-    `.qualitytags--tags{display:flex;padding-left:5px;gap:5px}.qualitytags--tags div{border-radius:500px;height:10px;padding:5px 10px;line-height:10px;color:#000}`
+    `.qualitytags--tags{display:flex;padding-left:5px;gap:5px}.qualitytags--tags div{border-radius:500px!important;height:10px;padding:5px 10px;line-height:10px;color:#000}`
   ),
 ];
 
