@@ -15,6 +15,8 @@ const colorMap = {
 }
 
 const unloadables = [
+  // NOTE: We'll have to stop intercepting this and start using a DOM observer due to the fact that
+  // track lists are heavily lazily loaded.
   intercept("favorites/SET_FAVORITE_IDS", () => {
     const state = getState();
     const trackElements = document.querySelectorAll("[data-track-id]");
