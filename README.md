@@ -21,3 +21,10 @@ Copy the following URL to the neptune plugin install page to install Discord RPC
 Experiments allows you to toggle experimental TIDAL features.
 
 Copy the following URL to the neptune plugin install page to install Experiments: `https://twnlink.github.io/neptune-plugins/Experiments`
+
+## Quality Tags
+Quality Tags adds tags next to each song that show what qualities are available for it.
+
+This plugin was inspired by [TidalTags](https://github.com/Inrixia/TidalTags).
+
+Copy the following URL to the neptune plugin install page to install Quality Tags: `https://twnlink.github.io/neptune-plugins/QualityTags`

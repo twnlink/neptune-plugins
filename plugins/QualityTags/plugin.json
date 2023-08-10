@@ -1,0 +1,6 @@
+{
+  "name": "Quality Tags",
+  "description": "Quality Tags adds a chip showing the available qualities for a song next to it.",
+  "author": "toonlink",
+  "main": "./index.js"
+}
