@@ -19,4 +19,4 @@ export const onUnload = intercept("user/LOAD_USER_SUCCESS", ([user]) => {
 });
 
 // Forcibly refresh the session just to ensure the subscription gets updated.
-refreshUserSession()
+refreshUserSession({ shouldReload: false })
