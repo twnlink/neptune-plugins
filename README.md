@@ -9,7 +9,7 @@ Copy the following URL to the neptune plugin install page to install AdBlock: `h
 ## Fake HiFi
 Fake HiFi tricks the app into thinking you have HiFi, allowing you to get access to lyrics and other HiFi only features. NOTE: This does not give you access to higher sound qualities than "Low".
 
-Copy the following URL to the neptune plugin install page to install AdBlock: `https://twnlink.github.io/neptune-plugins/FakeHiFi`
+Copy the following URL to the neptune plugin install page to install Fake HiFi: `https://twnlink.github.io/neptune-plugins/FakeHiFi`
 
 
 ## Discord RPC
