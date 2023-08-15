@@ -1,7 +1,7 @@
 import { intercept } from "@neptune";
 import { refreshUserSession } from "@neptune/actions/session";
 
-export const onUnload = () => {
+const unloadables = [
   intercept("user/LOAD_USER_SUCCESS", ([user]) => {
     // I don't think this does anything, but it's fun.
     user.meta.earlyAccessProgram = true;
@@ -17,7 +17,7 @@ export const onUnload = () => {
       canGetTrial: false,
       paymentType: "PARENT",
     };
-  });
+  }),
 
   intercept(
     "BOOTSTRAP_DONE",
@@ -25,5 +25,7 @@ export const onUnload = () => {
       refreshUserSession({ shouldReload: false });
     },
     true
-  );
-};
+  ),
+];
+
+export const onUnload = () => unloadables.forEach(u => u())
