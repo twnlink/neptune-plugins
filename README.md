@@ -32,4 +32,7 @@ Copy the following URL to the neptune plugin install page to install Quality Tag
 ## Song Share
 Allows you to send a song from the TIDAL mobile app to TIDAL desktop via the share sheet.
 
+iOS users: you can install the shortcut [here](https://routinehub.co/shortcut/16299/)
+Android users: WIP
+
 Copy the following URL to the neptune plugin install page to install Song Share: `https://twnlink.github.io/neptune-plugins/SongShare`
