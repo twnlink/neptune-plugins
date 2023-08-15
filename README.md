@@ -28,3 +28,8 @@ Quality Tags adds tags next to each song that show what qualities are available 
 This plugin was inspired by [TidalTags](https://github.com/Inrixia/TidalTags).
 
 Copy the following URL to the neptune plugin install page to install Quality Tags: `https://twnlink.github.io/neptune-plugins/QualityTags`
+
+## Song Share
+Allows you to send a song from the TIDAL mobile app to TIDAL desktop via the share sheet.
+
+Copy the following URL to the neptune plugin install page to install Song Share: `https://twnlink.github.io/neptune-plugins/SongShare`
