@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "multicast-dns": "^7.2.5"
+    "@homebridge/ciao": "^1.1.7"
   }
 }
