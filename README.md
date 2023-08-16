@@ -36,4 +36,6 @@ iOS users: you can install the shortcut [here](https://routinehub.co/shortcut/16
 
 Android users: WIP
 
+TODO: In the future I would like to add a web GUI to Song Share so that you can control the volume, pause, play, skip, and seek from your mobile device.
+
 Copy the following URL to the neptune plugin install page to install Song Share: `https://twnlink.github.io/neptune-plugins/SongShare`
