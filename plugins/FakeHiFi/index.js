@@ -20,7 +20,7 @@ const unloadables = [
   }),
 
   intercept(
-    "BOOTSTRAP_DONE",
+    ["BOOTSTRAP_DONE", "playbackControls/PLAY"],
     () => {
       refreshUserSession({ shouldReload: false });
     },
