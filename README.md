@@ -27,7 +27,7 @@ Allows you to send a song from the TIDAL mobile app to TIDAL desktop via the sha
 
 iOS users: you can install the shortcut [here](https://routinehub.co/shortcut/16299/)
 
-Android users: WIP
+Android users: you can sideload the neptune songshare app [here](https://github.com/uwu/neptune-songshare-android/releases/latest)
 
 TODO: In the future I would like to add a web GUI to Song Share so that you can control the volume, pause, play, skip, and seek from your mobile device.
 
