@@ -1,4 +1,4 @@
-import { store, intercept } from "@neptune";
+import { store, intercept, currentMediaItem } from "@neptune";
 import { getMediaURLFromID } from "@neptune/utils";
 import { AutoClient } from "discord-auto-rpc";
 
@@ -15,10 +15,7 @@ client.then(() => {
     intercept("playbackControls/TIME_UPDATE", ([current]) => {
       const state = store.getState();
 
-      const { item: currentlyPlaying, type: mediaType } =
-        state.content.mediaItems.get(
-          state.playbackControls.mediaProduct.productId
-        );
+      const { item: currentlyPlaying, type: mediaType } = currentMediaItem;
 
       // TODO: add video support
       if (mediaType != "track") return;
