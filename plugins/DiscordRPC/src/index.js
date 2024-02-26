@@ -17,10 +17,7 @@ client.then(() => {
 
       const { item: currentlyPlaying, type: mediaType } = currentMediaItem;
 
-      // TODO: add video support
-      if (mediaType != "track") return;
-
-      const albumArtURL = getMediaURLFromID(currentlyPlaying.album.cover);
+      const mediaURL = getMediaURLFromID(mediaType === "track" ? currentlyPlaying.album.cover : currentlyPlaying.imageId);
 
       const date = new Date();
       const now = (date.getTime() / 1000) | 0;
@@ -44,8 +41,8 @@ client.then(() => {
         state: formatLongString(
           "by " + currentlyPlaying.artists.map((a) => a.name).join(", ")
         ),
-        largeImageKey: albumArtURL,
-        largeImageText: formatLongString(currentlyPlaying.album.title),
+        largeImageKey: mediaURL,
+        largeImageText: formatLongString(mediaType === 'track' ? currentlyPlaying.album.title : currentlyPlaying.title),
       });
     })
   );
