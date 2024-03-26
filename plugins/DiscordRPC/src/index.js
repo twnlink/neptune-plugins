@@ -18,6 +18,7 @@ client.then(() => {
       const { item: currentlyPlaying, type: mediaType } = currentMediaItem;
 
       const mediaURL = getMediaURLFromID(mediaType === "track" ? currentlyPlaying.album.cover : currentlyPlaying.imageId);
+      const largeImageTextContent = mediaType === "track" ? currentlyPlaying.album.title : currentlyPlaying.title;
 
       const date = new Date();
       const now = (date.getTime() / 1000) | 0;
@@ -42,7 +43,8 @@ client.then(() => {
           "by " + currentlyPlaying.artists.map((a) => a.name).join(", ")
         ),
         largeImageKey: mediaURL,
-        largeImageText: formatLongString(mediaType === 'track' ? currentlyPlaying.album.title : currentlyPlaying.title),
+        // Discord requires largeImageText to be at least 2 characters long. So we add a invisible space to the end of the string if it's only 1 character long.
+        largeImageText: largeImageTextContent.length >= 2 ? formatLongString(largeImageTextContent) : (largeImageTextContent + "‎"),
       });
     })
   );
