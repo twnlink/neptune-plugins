@@ -1,9 +1,13 @@
 import { store, intercept, currentMediaItem } from "@neptune";
 import { getMediaURLFromID } from "@neptune/utils";
 import { AutoClient } from "discord-auto-rpc";
+import { html } from "@neptune/voby";
+import { storage } from "@plugin";
 
 const unloadables = [];
 const clientId = "1130698654987067493";
+
+storage.keepRpcOnPause ??= true;
 
 const formatLongString = (s) => (s.length >= 128 ? s.slice(0, 125) + "..." : s);
 
@@ -17,8 +21,10 @@ client.then(() => {
 
       const { item: currentlyPlaying, type: mediaType } = currentMediaItem;
 
-      const mediaURL = getMediaURLFromID(mediaType === "track" ? currentlyPlaying.album.cover : currentlyPlaying.imageId);
-      const largeImageTextContent = mediaType === "track" ? currentlyPlaying.album.title : currentlyPlaying.title;
+      // TODO: add video support
+      if (mediaType != "track") return;
+
+      const albumArtURL = getMediaURLFromID(currentlyPlaying.album.cover);
 
       const date = new Date();
       const now = (date.getTime() / 1000) | 0;
@@ -27,6 +33,10 @@ client.then(() => {
       );
 
       const paused = state.playbackControls.playbackState == "NOT_PLAYING";
+
+      if (paused && storage.keepRpcOnPause === false) {
+        return rpc.clearActivity();
+      }
 
       rpc.setActivity({
         ...(paused
@@ -42,9 +52,8 @@ client.then(() => {
         state: formatLongString(
           "by " + currentlyPlaying.artists.map((a) => a.name).join(", ")
         ),
-        largeImageKey: mediaURL,
-        // Discord requires largeImageText to be at least 2 characters long. So we add a invisible space to the end of the string if it's only 1 character long.
-        largeImageText: largeImageTextContent.length >= 2 ? formatLongString(largeImageTextContent) : (largeImageTextContent + "‎"),
+        largeImageKey: albumArtURL,
+        largeImageText: formatLongString(currentlyPlaying.album.title),
       });
     })
   );
@@ -58,4 +67,18 @@ export async function onUnload() {
     resolvedClient.clearActivity();
     resolvedClient.destroy();
   } catch {}
+}
+
+export function Settings() {
+  return html`
+    <div style="display:flex;justify-content:space-between">
+      <label for="keep-rpc-on-pause">Keep RPC on pause</label>
+      <input
+        id="keep-rpc-on-pause"
+        type="checkbox"
+        checked=${storage.keepRpcOnPause}
+        onChange=${(e) => storage.keepRpcOnPause = e.target.checked}
+      />
+    </div>
+  `;
 }
