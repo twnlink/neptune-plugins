@@ -3,9 +3,25 @@
   "description": "A neptune plugin monorepo template",
   "main": "index.js",
   "scripts": {
-    "build": "node ./build.js"
+    "watch": "concurrently \"nodemon\" \"npm run serve\"",
+    "build": "node ./build.js",
+    "serve": "npx http-server --cors -S -p 443",
+    "postinstall": "node postinstall.js"
   },
   "devDependencies": {
-    "esbuild": "^0.18.13"
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.18.13",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.1.4"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "./plugins/*/src/**"
+    ],
+    "ext": "*",
+    "exec": "npm run build"
+  },
+  "dependencies": {
+    "npm-installs": "^1.0.2"
   }
 }
