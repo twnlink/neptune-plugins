@@ -1,47 +1,51 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
 dependencies:
-  discord-auto-rpc:
-    specifier: ^1.0.17
-    version: 1.0.17
+  discord-rpc:
+    specifier: ^4.0.1
+    version: 4.0.1
 
 packages:
 
-  /@types/discord-rpc@4.0.5:
-    resolution: {integrity: sha512-4Nd8eo/razej1fglurBJGtkv/gAEeSdGySSmWv/dn0Xh0xvNcmtdnXmzMx1IVv52jXHloSegNGFDLjLsax0JFw==}
-    dev: false
-
-  /discord-auto-rpc@1.0.17:
-    resolution: {integrity: sha512-ZTK8azvfapMmwjxLAowHuOSglAens7UtBuQnL8b4VDmqzPM0K8ze1A/uPViWkJ8ROEOjZeHoK3zu0jwsQKGavQ==}
+  /bindings@1.5.0:
+    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
-      '@types/discord-rpc': 4.0.5
-      discord-rpc: 3.2.0
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - register-scheme
-      - utf-8-validate
+      file-uri-to-path: 1.0.0
     dev: false
+    optional: true
 
-  /discord-rpc@3.2.0:
-    resolution: {integrity: sha512-KJv0EVbGMlr04HoG6f5b3wD7X9kSHzQ2Ed2qfHSDvYJ1MkE8RbCQmMcQQrSvAxpfsqZgUjB/bsfi/mjyicCH+A==}
-    peerDependencies:
-      register-scheme: github:devsnek/node-register-scheme
+  /discord-rpc@4.0.1:
+    resolution: {integrity: sha512-HOvHpbq5STRZJjQIBzwoKnQ0jHplbEWFWlPDwXXKm/bILh4nzjcg7mNqll0UY7RsjFoaXA7e/oYb/4lvpda2zA==}
     dependencies:
-      node-fetch: 2.6.12
-      ws: 7.5.9
+      node-fetch: 2.7.0
+      ws: 7.5.10
+    optionalDependencies:
+      register-scheme: github.com/devsnek/node-register-scheme/e7cc9a63a1f512565da44cb57316d9fb10750e17
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
     dev: false
 
-  /node-fetch@2.6.12:
-    resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
+  /file-uri-to-path@1.0.0:
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /node-addon-api@1.7.2:
+    resolution: {integrity: sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
@@ -67,8 +71,8 @@ packages:
       webidl-conversions: 3.0.1
     dev: false
 
-  /ws@7.5.9:
-    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
+  /ws@7.5.10:
+    resolution: {integrity: sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==}
     engines: {node: '>=8.3.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -79,3 +83,14 @@ packages:
       utf-8-validate:
         optional: true
     dev: false
+
+  github.com/devsnek/node-register-scheme/e7cc9a63a1f512565da44cb57316d9fb10750e17:
+    resolution: {tarball: https://codeload.github.com/devsnek/node-register-scheme/tar.gz/e7cc9a63a1f512565da44cb57316d9fb10750e17}
+    name: register-scheme
+    version: 0.0.2
+    requiresBuild: true
+    dependencies:
+      bindings: 1.5.0
+      node-addon-api: 1.7.2
+    dev: false
+    optional: true

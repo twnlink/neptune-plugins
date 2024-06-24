@@ -9,9 +9,12 @@
     "postinstall": "node postinstall.js"
   },
   "devDependencies": {
+    "@types/discord-rpc": "^4.0.8",
+    "@types/node": "^20.14.8",
     "concurrently": "^8.2.2",
     "esbuild": "^0.18.13",
     "http-server": "^14.1.1",
+    "neptune-types": "^1.0.0",
     "nodemon": "^3.1.4"
   },
   "nodemonConfig": {

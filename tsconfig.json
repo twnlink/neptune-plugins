@@ -1,0 +1,6 @@
+{
+	"extends": "neptune-types/tsconfig.base.json",
+	"compilerOptions": {
+		"types": ["node", "neptune-types"]
+	}
+}
