@@ -82,8 +82,6 @@ const updateRPC = async (currentTime?: number) => {
 	if (currentlyPlaying.album !== undefined) {
 		activityState.largeImageKey = getMediaURLFromID(currentlyPlaying.album.cover);
 		activityState.largeImageText = formatLongString(currentlyPlaying.album.title);
-		activityState.smallImageKey = activityState.largeImageKey;
-		activityState.smallImageText = activityState.largeImageText;
 	}
 
 	// Title/Artist
