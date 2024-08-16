@@ -1,1 +1,0 @@
-import{appendStyle as r}from"@neptune/utils";import{intercept as s}from"@neptune";var e=[];e.push(s(["interruptions/QUEUE_INTERRUPTION","interruptions/ADD_ITEMS_TO_INTERRUPTIONS_ARRAY"],()=>!0),r('[class*="sidebarUpgrade--"],[class*="field--"]:has([class*="disableUnderline--"]){display:none!important}'));var a=()=>e.forEach(n=>n());export{a as onUnload};
