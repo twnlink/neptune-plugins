@@ -54,6 +54,16 @@ if (!window.ranRemoteDesktopRootSaga) {
   }, 1500);
 }
 
+let progressInterval = setInterval(() => {
+  if (!beingControlled) return;
+
+  // This isn't how the official implementation does it, but it's how I do it :D
+  nativeInterface.remoteDesktop.onProgressUpdated(
+    parseInt(progressBar.getAttribute("aria-valuenow")) * 1000
+  );
+}, 1000);
+
+let beingControlled = false;
 addUnloadable(
   intercept("remotePlayback/remoteDesktop/STATE_CHANGED", ([payload]) => {
     if (!bannerElement) {
@@ -70,15 +80,18 @@ addUnloadable(
       bannerElement = document.getElementById(bannerId);
     }
 
-    if (payload == 0) {
-      bannerElement.setAttribute("hidden", "");
-    } else {
+    beingControlled = payload != 0;
+
+    if (beingControlled) {
       bannerElement.removeAttribute("hidden");
+    } else {
+      bannerElement.setAttribute("hidden", "");
     }
   })
 );
 
 export function onUnload() {
+  clearInterval(progressInterval)
   closeConnect();
   dispatch({ type: "remotePlayback/remoteDesktop/STATE_CHANGED", payload: 0 });
   bannerElement?.remove?.();
