@@ -49,7 +49,7 @@ if (!window.ranRemoteDesktopRootSaga) {
 
     sagaCtx.run(remoteDesktopRootSaga);
     window.ranRemoteDesktopRootSaga = true;
-  }, 5000);
+  }, 1500);
 }
 
 intercept("remotePlayback/remoteDesktop/STATE_CHANGED", ([payload]) => {
