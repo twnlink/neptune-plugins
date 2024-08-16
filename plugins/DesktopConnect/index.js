@@ -1,6 +1,7 @@
 import { appendStyle } from "@neptune/utils";
 import { intercept } from "@neptune";
 import { dispatch } from "@neptune/store";
+import { addUnloadable } from "@plugin";
 import { openConnect, closeConnect } from "./desktop.native";
 
 const bannerId = "twnlink-desktopconnect-banner";
@@ -33,8 +34,9 @@ if (!window.ranRemoteDesktopRootSaga) {
       }
     })();
 
-    const rootSaga = neptune.modules.find((m) => m?.exports && m?.exports?.rootSaga)
-      ?.exports.rootSaga;
+    const rootSaga = neptune.modules.find(
+      (m) => m?.exports && m?.exports?.rootSaga
+    )?.exports.rootSaga;
 
     const remoteDesktopRootSaga = (() => {
       let ranSaga = rootSaga();
@@ -52,27 +54,29 @@ if (!window.ranRemoteDesktopRootSaga) {
   }, 1500);
 }
 
-intercept("remotePlayback/remoteDesktop/STATE_CHANGED", ([payload]) => {
-  if (!bannerElement) {
-    document.querySelector(`div[class^="bar--"]`).insertAdjacentHTML(
-      "afterend",
-      `
+addUnloadable(
+  intercept("remotePlayback/remoteDesktop/STATE_CHANGED", ([payload]) => {
+    if (!bannerElement) {
+      document.querySelector(`div[class^="bar--"]`).insertAdjacentHTML(
+        "afterend",
+        `
     <div hidden id="${bannerId}">
       <div>
         The player is currently being controlled by TIDAL Connect.
       </div>
     </div>`
-    );
+      );
 
-    bannerElement = document.getElementById(bannerId);
-  }
+      bannerElement = document.getElementById(bannerId);
+    }
 
-  if (payload == 0) {
-    bannerElement.setAttribute("hidden", "");
-  } else {
-    bannerElement.removeAttribute("hidden");
-  }
-});
+    if (payload == 0) {
+      bannerElement.setAttribute("hidden", "");
+    } else {
+      bannerElement.removeAttribute("hidden");
+    }
+  })
+);
 
 export function onUnload() {
   closeConnect();
