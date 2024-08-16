@@ -41,7 +41,7 @@ export function openConnect() {
   if (!globalThis.neptuneRemoteDesktop) {
     globalThis.neptuneRemoteDesktop = new RemoteDesktopController();
 
-    neptuneRemoteDesktop.mdnsStartBroadcasting = service.advertise()
+    neptuneRemoteDesktop.mdnsStartBroadcasting = () => service.advertise()
     neptuneRemoteDesktop.mdnsStopBroadcasting = () => service.end();
   }
 }
