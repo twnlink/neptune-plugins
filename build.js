@@ -2,7 +2,8 @@ const esbuild = require("esbuild");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const repl = require("repl");
+
+const nativeExternals = ["@neptune", "@plugin", "electron"]
 
 const plugins = fs.readdirSync("./plugins");
 for (const plugin of plugins) {
@@ -19,13 +20,64 @@ for (const plugin of plugins) {
       entryPoints: [
         "./" + path.join(pluginPath, pluginManifest.main ?? "index.js"),
       ],
+      plugins: [
+        {
+          name: "neptuneNativeImports",
+          setup(build) {
+            build.onLoad(
+              { filter: /.*[\/\\].+\.native\.[a-z]+/g },
+              async (args) => {
+                const result = await esbuild.build({
+                  entryPoints: [args.path],
+                  bundle: true,
+                  minify: true,
+                  platform: "node",
+                  format: "iife",
+                  globalName: "neptuneExports",
+                  write: false,
+                  external: nativeExternals
+                });
+
+                const outputCode = result.outputFiles[0].text;
+
+                // HATE! WHY WHY WHY WHY WHY (globalName breaks metafile. crying emoji)
+                const { metafile } = await esbuild.build({
+                  entryPoints: [args.path],
+                  platform: "node",
+                  write: false,
+                  metafile: true,
+                  bundle: true, // I find it annoying that I have to enable bundling.
+                  format: "esm", // This avoids exports not being properly defined, thus you do not need to change log levels.
+                  external: nativeExternals,
+                });
+
+                const builtExports = Object.values(metafile.outputs)[0].exports;
+
+                return {
+                  contents: `import {addUnloadable} from "@plugin";const contextId=NeptuneNative.createEvalScope(${JSON.stringify(
+                    outputCode
+                  )});${builtExports
+                    .map(
+                      (e) =>
+                        `export ${
+                          e == "default" ? "default " : `const ${e} =`
+                        } NeptuneNative.getNativeValue(contextId,${JSON.stringify(
+                          e
+                        )})`
+                    )
+                    .join(
+                      ";"
+                    )};addUnloadable(() => NeptuneNative.deleteEvalScope(contextId))`,
+                };
+              }
+            );
+          },
+        },
+      ],
       bundle: true,
       minify: true,
       format: "esm",
-      // Make every node builtin external while still bundling for browsers.
       external: [
-        ...repl._builtinLibs,
-        ...repl._builtinLibs.map((m) => "node:" + m),
         "@neptune",
         "@plugin",
       ],

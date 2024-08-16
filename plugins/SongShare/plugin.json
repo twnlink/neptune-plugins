@@ -1,6 +1,0 @@
-{
-  "name": "Song Share",
-  "description": "Allows mobile devices to tell the TIDAL client to play a song.",
-  "author": "toonlink",
-  "main": "./index.js"
-}

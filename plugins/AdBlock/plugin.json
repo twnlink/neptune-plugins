@@ -1,6 +1,0 @@
-{
-  "name": "AdBlock",
-  "description": "Blocks all TIDAL Free advertisements.",
-  "author": "toonlink",
-  "main": "./index.js"
-}
