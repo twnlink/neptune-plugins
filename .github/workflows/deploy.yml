@@ -29,7 +29,7 @@ jobs:
                 for plugin in plugins/*
                 do
                   cd $plugin
-                  pnpm install
+                  pnpm install --no-frozen-lockfile
                   cd ../..
                 done
 
