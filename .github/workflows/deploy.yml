@@ -24,7 +24,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                npm i -g pnpm
+                npm i -g pnpm@latest
                 pnpm i
                 for plugin in plugins/*
                 do
